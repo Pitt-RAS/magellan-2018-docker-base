@@ -1,10 +1,6 @@
 pipeline {
   agent any
 
-  environment {
-    registryCredential = 'rasdocker'
-  }
-
   stages {
     stage('Build') {
       steps {
@@ -16,7 +12,9 @@ pipeline {
     stage('Push') {
       steps {
         script {
-          builtImage.push()
+          withDockerRegistry([credentialsId: 'rasdocker', url: '']) {
+            builtImage.push()
+          }
         }
       }
     }
