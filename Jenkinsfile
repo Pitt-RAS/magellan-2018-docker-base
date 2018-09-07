@@ -9,7 +9,14 @@ pipeline {
     stage('Build') {
       steps {
         script {
-          builtImage = docker.build "pittras/magellan-2018-base:$BUILD_NUMBER"
+          builtImage = docker.build "pittras/magellan-2018-base:$BRANCH_NAME"
+        }
+      }
+    }
+    stage('Push') {
+      steps {
+        script {
+          builtImage.push()
         }
       }
     }
