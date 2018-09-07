@@ -1,4 +1,17 @@
-node {
-    checkout scm
-    def customImage = docker.build("pittras/magellan-2018-base:${env.BUILD_ID}")
+pipeline {
+  agent any
+
+  environment {
+    registryCredential = 'rasdocker'
+  }
+
+  stages {
+    stage('Build') {
+      steps {
+        script {
+          builtImage = docker.build "pittras/magellan-2018-base:$BUILD_NUMBER"
+        }
+      }
+    }
+  }
 }
