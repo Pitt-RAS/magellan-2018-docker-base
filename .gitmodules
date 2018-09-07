@@ -1,4 +1,4 @@
 [submodule "arduino-libraries/SBUS"]
 	path = arduino-libraries/SBUS
 	url = https://github.com/bolderflight/SBUS.git
-    shallow = true
+	shallow = true
