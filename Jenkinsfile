@@ -2,6 +2,13 @@ pipeline {
   agent any
 
   stages {
+    stage('Submodule Checkout') {
+        steps {
+            script {
+                sh 'git submodule update --init --recursive'
+            }
+        }
+    }
     stage('Build') {
       steps {
         script {
