@@ -3,9 +3,14 @@ FROM ros:melodic-robot
 COPY magellan-deps /opt/magellan-deps
 
 RUN apt-get update
+RUN apt-get install -y software-properties-common
+
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C8B3A55A6F3EFCDE
+RUN add-apt-repository "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo bionic main" -u
+
 # Need to install arduino-core because of a ROS dependency
 # We'll actually use our Teensyduino version in /opt
-RUN apt-get install -y ros-melodic-robot-localization arduino-core python-serial python-pip wget
+RUN apt-get install -y ros-melodic-robot-localization arduino-core python-serial python-pip wget libgl1-mesa-dev libglfw3-dev libgtk-3-dev librealsense2-dev
 
 RUN pip install serial pyserial
 
