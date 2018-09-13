@@ -2,3 +2,6 @@
 	path = arduino-libraries/SBUS
 	url = https://github.com/bolderflight/SBUS.git
 	shallow = true
+[submodule "magellan-deps"]
+	path = magellan-deps
+	url = https://github.com/Pitt-RAS/magellan-deps.git
