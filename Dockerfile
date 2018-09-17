@@ -29,4 +29,4 @@ RUN /opt/magellan-deps/prepare.sh
 RUN bash -c "source /opt/ros/melodic/setup.bash && rosdep update && rosdep install --from-paths src --ignore-src -y"
 RUN bash -c "source /opt/ros/melodic/setup.bash && /opt/magellan-deps/build.sh"
 
-ENTRYPOINT /robot-entrypoint.sh
+ENTRYPOINT ["/robot-entrypoint.sh"]
