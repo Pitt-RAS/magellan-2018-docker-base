@@ -4,7 +4,7 @@ COPY robot-entrypoint.sh /robot-entrypoint.sh
 COPY magellan-deps /opt/magellan-deps
 
 RUN apt-get update
-RUN apt-get install -y software-properties-common
+RUN apt-get install -y software-properties-common libusb-dev
 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C8B3A55A6F3EFCDE
 RUN add-apt-repository "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo bionic main" -u
@@ -17,6 +17,7 @@ RUN pip install serial pyserial
 
 COPY arduino-1.8.6 /opt/arduino-1.8.6
 # Patch Teensy so it won't try to download
+RUN mv /opt/arduino-1.8.6/hardware/tools/teensy_post_compile /opt/arduino-1.8.6/hardware/tools/teensy_post_compile.old
 COPY dummy-script.sh /opt/arduino-1.8.6/hardware/tools/teensy_post_compile
 RUN chmod +x /opt/arduino-1.8.6/hardware/tools/teensy_post_compile
 
