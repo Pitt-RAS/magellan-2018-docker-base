@@ -15,6 +15,15 @@ RUN apt-get install -y ros-melodic-robot-localization arduino-core python-serial
 
 RUN pip install serial pyserial
 
+# Build teensy loader
+RUN git clone --depth=1 https://github.com/PaulStoffregen/teensy_loader_cli.git && \
+    cd teensy_loader_cli && \
+    make && \
+    mv teensy_loader_cli /usr/local/bin && \
+    cd .. && \
+    rm -rf teensy_loader_cli
+
+
 COPY arduino-1.8.6 /opt/arduino-1.8.6
 # Patch Teensy so it won't try to download
 RUN mv /opt/arduino-1.8.6/hardware/tools/teensy_post_compile /opt/arduino-1.8.6/hardware/tools/teensy_post_compile.old
