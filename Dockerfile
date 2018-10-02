@@ -1,5 +1,16 @@
 FROM ros:melodic-robot
 
+# Install Arduino
+COPY arduino-1.8.6 /opt/arduino-1.8.6
+# Patch Teensy so it won't try to download
+RUN mv /opt/arduino-1.8.6/hardware/tools/teensy_post_compile /opt/arduino-1.8.6/hardware/tools/teensy_post_compile.old
+COPY dummy-script.sh /opt/arduino-1.8.6/hardware/tools/teensy_post_compile
+RUN chmod +x /opt/arduino-1.8.6/hardware/tools/teensy_post_compile
+
+ENV ARDUINO_PATH /opt/arduino-1.8.6
+
+COPY arduino-libraries /root/Arduino/libraries
+
 COPY robot-entrypoint.sh /robot-entrypoint.sh
 COPY magellan-deps /opt/magellan-deps
 
@@ -22,17 +33,6 @@ RUN git clone --depth=1 https://github.com/PaulStoffregen/teensy_loader_cli.git 
     mv teensy_loader_cli /usr/local/bin && \
     cd .. && \
     rm -rf teensy_loader_cli
-
-
-COPY arduino-1.8.6 /opt/arduino-1.8.6
-# Patch Teensy so it won't try to download
-RUN mv /opt/arduino-1.8.6/hardware/tools/teensy_post_compile /opt/arduino-1.8.6/hardware/tools/teensy_post_compile.old
-COPY dummy-script.sh /opt/arduino-1.8.6/hardware/tools/teensy_post_compile
-RUN chmod +x /opt/arduino-1.8.6/hardware/tools/teensy_post_compile
-
-ENV ARDUINO_PATH /opt/arduino-1.8.6
-
-COPY arduino-libraries /root/Arduino/libraries
 
 WORKDIR /opt/magellan-deps
 RUN /opt/magellan-deps/prepare.sh
