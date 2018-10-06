@@ -5,3 +5,6 @@
 [submodule "magellan-deps"]
 	path = magellan-deps
 	url = https://github.com/Pitt-RAS/magellan-deps.git
+[submodule "arduino-libraries/Adafruit_BNO055"]
+	path = arduino-libraries/Adafruit_BNO055
+	url = https://github.com/adafruit/Adafruit_BNO055.git
