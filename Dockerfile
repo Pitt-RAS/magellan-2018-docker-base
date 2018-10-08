@@ -24,7 +24,7 @@ RUN add-apt-repository "deb http://realsense-hw-public.s3.amazonaws.com/Debian/a
 # We'll actually use our Teensyduino version in /opt
 RUN apt-get install -y ros-melodic-robot-localization arduino-core python-serial python-pip wget libgl1-mesa-dev libglfw3-dev libgtk-3-dev librealsense2-dev
 
-RUN pip install serial pyserial
+RUN pip install pyserial
 
 # Build teensy loader
 RUN git clone --depth=1 https://github.com/PaulStoffregen/teensy_loader_cli.git && \
