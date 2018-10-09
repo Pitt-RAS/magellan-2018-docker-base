@@ -15,7 +15,7 @@ COPY robot-entrypoint.sh /robot-entrypoint.sh
 COPY magellan-deps /opt/magellan-deps
 
 RUN apt-get update
-RUN apt-get install -y software-properties-common libusb-dev clang-format
+RUN apt-get install -y software-properties-common libusb-dev uncrustify
 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C8B3A55A6F3EFCDE
 RUN add-apt-repository "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo bionic main" -u
