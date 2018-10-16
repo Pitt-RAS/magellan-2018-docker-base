@@ -1,0 +1,3 @@
+pyserial
+flake8
+autopep8
