@@ -8,7 +8,7 @@ RUN add-apt-repository "deb http://realsense-hw-public.s3.amazonaws.com/Debian/a
 
 # Need to install arduino-core because of a ROS dependency
 # We'll actually use our Teensyduino version in /opt
-RUN apt-get install -y ros-melodic-robot-localization arduino-core python-serial python-pip wget libgl1-mesa-dev libglfw3-dev libgtk-3-dev librealsense2-dev
+RUN apt-get install -y ros-melodic-rplidar-ros ros-melodic-robot-localization arduino-core python-serial python-pip wget libgl1-mesa-dev libglfw3-dev libgtk-3-dev librealsense2-dev
 
 RUN pip install pyserial flake8 autopep8
 
