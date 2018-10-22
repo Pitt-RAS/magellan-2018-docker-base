@@ -12,7 +12,7 @@ pipeline {
     stage('Build') {
       steps {
         script {
-          builtImage = docker.build "pittras/magellan-2018-base:$BRANCH_NAME-$BUILD_ID"
+          builtImage = docker.build("pittras/magellan-2018-base:$BRANCH_NAME-$BUILD_ID", "--no-cache .")
         }
       }
     }
@@ -24,6 +24,11 @@ pipeline {
           }
         }
       }
+    }
+  }
+  post {
+    always {
+        cleanWs()
     }
   }
 }
