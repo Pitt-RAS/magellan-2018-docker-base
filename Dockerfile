@@ -13,8 +13,6 @@ RUN add-apt-repository "deb http://realsense-hw-public.s3.amazonaws.com/Debian/a
 RUN apt-get install -y arduino-core python-serial python-pip wget libgl1-mesa-dev libglfw3-dev libgtk-3-dev librealsense2-dev
 RUN apt-get install -y ros-melodic-rplidar-ros ros-melodic-robot-localization ros-melodic-rosserial ros-melodic-rosserial-arduino
 
-RUN pip install flake8 autopep8
-
 # Install Arduino
 COPY arduino-1.8.6 /opt/arduino-1.8.6
 # Patch Teensy so it won't try to download
@@ -29,8 +27,9 @@ COPY arduino-libraries /root/Arduino/libraries
 COPY robot-entrypoint.sh /robot-entrypoint.sh
 
 COPY magellan-deps /opt/magellan-deps
-
 WORKDIR /opt/magellan-deps
+RUN pip install -r requirements_pip.txt
+
 RUN /opt/magellan-deps/prepare.sh
 RUN bash -c "source /opt/ros/melodic/setup.bash && rosdep update && rosdep install --from-paths src --ignore-src -y"
 RUN bash -c "source /opt/ros/melodic/setup.bash && /opt/magellan-deps/build.sh"
