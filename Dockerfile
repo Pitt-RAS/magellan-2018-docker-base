@@ -3,7 +3,9 @@ FROM ros:melodic-robot
 ENV IS_DOCKER_BUILD true
 
 RUN apt-get update
-RUN apt-get install -y software-properties-common libusb-dev uncrustify
+RUN apt-get install -y software-properties-common libusb-dev uncrustify vim
+
+COPY vimrc /root/.vimrc
 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C8B3A55A6F3EFCDE
 RUN add-apt-repository "deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo bionic main" -u
